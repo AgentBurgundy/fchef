@@ -8,9 +8,11 @@ app.use(express.static(__dirname + '/dist/wtfsic'));
 
 app.get('/api', (req, res) => {
     let info = {
+        id: 'empty',
         key: 'empty'
     };
 
+    info.id = process.env.API_ID;
     info.key = process.env.API_KEY;
 
     res.status(200).send(info);

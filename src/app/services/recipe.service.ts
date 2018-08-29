@@ -29,19 +29,19 @@ export class RecipeService {
   }
 
   public getRandomRecipe(data: any, query: string, options: any): Observable<Recipe> {
-    return this.http.get('http://food2fork.com/api/search', {
+    return this.http.get('https://api.edamam.com/search', {
       params: {
-        "key": data.key,
+        "app_id": data.id,
+        "app_key": data.key,
         "q": query,
-        "sort": "r"
       }
     }).pipe(map((res: Response) => {
-      let recipe: any = res["recipes"][Math.floor(Math.random() * Object.keys(res["recipes"]).length)]
+      let results: any = res['hits'];
+      let index : number = Math.floor(Math.random()*100);
       
       return new Recipe({
-        title: recipe["title"],
-        image_url: recipe["image_url"],
-        source_url: recipe["source_url"],
+        title: results[index].recipe.label,
+        source_url: results[index].recipe.url
       });
     }));
   }
