@@ -36,12 +36,12 @@ export class RecipeService {
         "q": query,
       }
     }).pipe(map((res: Response) => {
-      let results: any = res['hits'];
-      let index : number = Math.floor(Math.random()*100);
+      let index : number = Math.floor(Math.random() * Object.keys(res['hits']).length);
+      let recipe: any = res['hits'][index]['recipe']
       
       return new Recipe({
-        title: results[index]['recipe']['label'],
-        source_url: results[index]['recipe']['url']
+        title: recipe.label,
+        source_url: recipe.url
       });
     }));
   }
