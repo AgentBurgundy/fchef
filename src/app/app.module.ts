@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './pages/main/main.component';
 import { appRoutes } from './app-routes';
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
+import { ImageViewComponent } from './components/image-view/image-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    RecipeViewComponent
+    RecipeViewComponent,
+    ImageViewComponent
   ],
   imports: [
     BrowserModule,
