@@ -5,20 +5,14 @@
 
     <div *ngIf="!isLoading && !error" class="d-flex flex-row align-content-center justify-content-center">
         <div class="card">
-            <div class="card-header">
-                <div class="d-flex flex-row justify-content-center align-content-center">
-                    <h3 class="mx-auto text-center">{{ currentFuckingRecipe.title }}</h3>
+            <app-image-view [imageUrl]="currentFuckingRecipe.image_url"></app-image-view>
 
-                    <a class="btn btn-primary mx-auto float-right" target="_blank" href="{{ currentFuckingRecipe.source_url }}">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
-            </div>
-    
             <div class="card-body">
-                <div class="d-flex flex-row align-content-center justify-content-center">
-                    <app-image-view [imageUrl]="currentFuckingRecipe.image_url"></app-image-view>
-                </div>                            
+                <h3 class="card-title">{{ currentFuckingRecipe.title }}</h3>
+
+                <a class="btn btn-primary mx-auto float-right" target="_blank" href="{{ currentFuckingRecipe.source_url }}">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
         </div>
     </div>
