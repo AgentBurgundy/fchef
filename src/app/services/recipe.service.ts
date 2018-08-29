@@ -40,7 +40,7 @@ export class RecipeService {
       let recipe: any = res['hits'][index]['recipe']
       
       return new Recipe({
-        title: recipe.label,
+        title: recipe.label.replace('/recipe/gi', ''),
         source_url: recipe.url
       });
     }));
