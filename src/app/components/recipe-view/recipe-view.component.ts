@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Observable } from 'rxjs';
+import { Recipe } from '../../models/recipe.model';
 
 @Component({
   selector: 'app-recipe-view',
@@ -10,9 +11,7 @@ import { Observable } from 'rxjs';
 export class RecipeViewComponent implements OnInit {
 
   queryTerm: string = 'chicken';
-  currentFuckingRecipe: any = {
-    title: ''
-  };
+  currentFuckingRecipe: Recipe;
   fuckingOptions: any = {
 
   };
@@ -31,7 +30,6 @@ export class RecipeViewComponent implements OnInit {
         .subscribe(data => 
           {
             this.currentFuckingRecipe = data;
-            console.log(`Received data - ${this.currentFuckingRecipe.id} ${this.currentFuckingRecipe.key}`);
           });
     });    
   }

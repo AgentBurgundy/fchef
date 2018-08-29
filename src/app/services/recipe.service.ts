@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Auth } from '../models/auth.model';
+import { Recipe } from '../models/recipe.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,17 +28,21 @@ export class RecipeService {
     return this.http.get<Auth>(this.host);
   }
 
-  public getRandomRecipe(data: any, query: string, options: any): Observable<Object> {
-    return this.http.get('https://api.edamam.com/search', {
+  public getRandomRecipe(data: any, query: string, options: any): Observable<Recipe> {
+    return this.http.get('http://food2fork.com/api/search', {
       params: {
-        "app_id": data.id,
-        "app_key": data.key,
-        "q": query
+        "key": data.key,
+        "q": query,
+        "sort": "r"
       }
     }).pipe(map((res: Response) => {
-      return {
-        title: res["hits"][Math.floor(Math.random() * Object.keys(res["hits"]).length)]["recipe"]["label"]
-      }
+      let recipe: any = res["recipes"][Math.floor(Math.random() * Object.keys(res["recipes"]).length)]
+      
+      return new Recipe({
+        title: recipe["title"],
+        image_url: recipe["image_url"],
+        source_url: recipe["source_url"],
+      });
     }));
   }
 }
