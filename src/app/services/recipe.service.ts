@@ -40,8 +40,8 @@ export class RecipeService {
       let index : number = Math.floor(Math.random()*100);
       
       return new Recipe({
-        title: results[index].recipe.label,
-        source_url: results[index].recipe.url
+        title: results[index]['recipe']['label'],
+        source_url: results[index]['recipe']['url']
       });
     }));
   }
