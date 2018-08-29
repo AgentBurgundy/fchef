@@ -41,7 +41,8 @@ export class RecipeService {
       
       return new Recipe({
         title: recipe.label.replace('/recipe/gi', ''),
-        source_url: recipe.url
+        source_url: recipe.url,
+        image_url: recipe.image_url
       });
     }));
   }
