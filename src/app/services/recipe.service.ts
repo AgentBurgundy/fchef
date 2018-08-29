@@ -36,8 +36,7 @@ export class RecipeService {
         "q": query,
       }
     }).pipe(map((res: Response) => {
-      let index : number = Math.floor(Math.random() * 100);
-      console.log(index);
+      let index : number = Math.floor(Math.random() * Object.keys(res['hits']).length);
       let recipe: any = res['hits'][index]['recipe']
       
       return new Recipe({
