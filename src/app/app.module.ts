@@ -21,7 +21,7 @@ import { ImageViewComponent } from './components/image-view/image-view.component
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http, ResponseContentType } from '@angular/http';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-image-view',
@@ -12,25 +10,11 @@ export class ImageViewComponent implements OnInit {
   @Input()
   imageUrl: string;
 
-  imageData: any;
-
-  constructor(private http: Http, private sanitizer: DomSanitizer) {
+  constructor() {
   }
 
   ngOnInit() {
-   this.http.get(this.imageUrl, {
-      responseType: ResponseContentType.Blob
-    })
-      .toPromise()
-      .then((res: any) => {
-        let blob = new Blob([res._body], {
-          type: res.headers.get("Content-Type")
-        });
 
-        let urlCreator = window.URL;
-        this.imageData = this.sanitizer.bypassSecurityTrustUrl(
-            urlCreator.createObjectURL(blob));
-      });
   }
 
 }
