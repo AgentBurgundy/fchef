@@ -4,18 +4,19 @@
     </div>
 
     <div *ngIf="!isLoading && !error" class="d-flex flex-row align-content-center justify-content-center">
-        <h3>{{ currentFuckingRecipe.title }}</h3>
-    </div>
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ currentFuckingRecipe.title }}</h3>
+            </div>
     
-    <div *ngIf="!isLoading && !error" class="d-flex flex-row align-content-center justify-content-center">
-        <app-image-view [imageUrl]="currentFuckingRecipe.image_url"></app-image-view>
-    </div>
-
-    <div *ngIf="!isLoading && !error" class="d-flex flex-row align-content-center justify-content-center">
-        <a class="btn btn-primary my-3" target="_blank" href="{{ currentFuckingRecipe.source_url }}">
-            <i class="fas fa-external-link-alt"></i>
-            See Recipe
-        </a>
+            <div class="card-body">
+                <app-image-view [imageUrl]="currentFuckingRecipe.image_url"></app-image-view>
+                <a class="btn btn-primary my-3" target="_blank" href="{{ currentFuckingRecipe.source_url }}">
+                    <i class="fas fa-external-link-alt"></i>
+                    See Recipe
+                </a>
+            </div>
+        </div>
     </div>
 
     <div *ngIf="isLoading" class="d-flex flex-row align-content-center justify-content-center">
