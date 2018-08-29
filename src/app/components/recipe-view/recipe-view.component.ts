@@ -10,6 +10,8 @@ import { Recipe } from '../../models/recipe.model';
 })
 export class RecipeViewComponent implements OnInit {
 
+  isLoading: boolean = true;
+  error: boolean = false;
   queryTerm: string = 'chicken';
   currentFuckingRecipe: Recipe;
   fuckingOptions: any = {
@@ -24,14 +26,22 @@ export class RecipeViewComponent implements OnInit {
 
   search() {
     console.log('Getting info from server...');
-    
+    this.isLoading = true;
+    this.error = false;
+
     this.recipeService.getAuth().subscribe(auth => {
       this.recipeService.getRandomRecipe(auth, this.queryTerm, this.fuckingOptions)
         .subscribe(data => 
           {
             this.currentFuckingRecipe = data;
             console.log(data.image_url);
-          });
+            this.isLoading = false;
+          },
+        error => {
+          console.log(error);
+          this.isLoading = false;
+          this.error = true;
+        });
     });    
   }
 
