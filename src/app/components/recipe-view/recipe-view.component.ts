@@ -30,6 +30,7 @@ export class RecipeViewComponent implements OnInit {
         .subscribe(data => 
           {
             this.currentFuckingRecipe = data;
+            console.log(data.image_url);
           });
     });    
   }
