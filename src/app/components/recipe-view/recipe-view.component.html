@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="d-flex flex-row align-content-center justify-content-center">
+        <h5>You should make...</h5>
+    </div>
+
+    <div class="d-flex flex-row align-content-center justify-content-center">
+        <h3>{{ currentFuckingRecipe.title }}</h3>
+    </div>
+
+    <div class="d-flex flex-row align-content-center justify-content-center">
+        <form #queryForm="ngForm" (ngSubmit)="search()">
+            <div class="form-group">
+                <input class="form-control" type="text" required name="query" id="query" [(ngModel)]="queryTerm"/>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" [disabled]="!queryForm.form.valid">Get Another Fucking Recipe</button>
+            </div>            
+        </form>
+    </div>
+</div>
