@@ -1,10 +1,20 @@
 <div class="container">
+    <div class="d-flex my-3 flex-row align-content-center justify-content-center">
+        <form #queryForm="ngForm" (ngSubmit)="search()">
+            <div class="form-group">
+                <label id="queryLabel" name="queryLabel" for="query">Enter an ingredient to search for</label>
+                <input class="form-control" type="text" required name="query" id="query" [(ngModel)]="queryTerm" aria-labelledby="queryLabel"/>
+                <button type="submit" class="btn btn-primary" [disabled]="!queryForm.form.valid">Get Another Recipe</button>
+            </div>      
+        </form>
+    </div>
+
     <div class="d-flex flex-row align-content-center justify-content-center">
         <h5>You should make...</h5>
     </div>
 
     <div *ngIf="!isLoading && !error" class="d-flex flex-row align-content-center justify-content-center">
-        <div class="card">
+        <div class="card wow bounceInUp">
             <app-image-view [imageUrl]="currentFuckingRecipe.image_url"></app-image-view>
 
             <div class="card-body">
@@ -26,17 +36,5 @@
 
     <div *ngIf="!isLoading && error" class="d-flex flex-row align-content-center justify-content-center">
         <h5>Oops, there was an error. This could be due to heavy traffic. Try again in a minute!</h5>
-    </div>
-
-    <div class="d-flex flex-row align-content-center justify-content-center">
-        <form #queryForm="ngForm" (ngSubmit)="search()">
-            <div class="form-group">
-                <input class="form-control" type="text" required name="query" id="query" [(ngModel)]="queryTerm"/>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" [disabled]="!queryForm.form.valid">Get Another Fucking Recipe</button>
-            </div>            
-        </form>
     </div>
 </div>
