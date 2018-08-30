@@ -3,6 +3,8 @@ import { RecipeService } from '../../services/recipe.service';
 import { Observable } from 'rxjs';
 import { Recipe } from '../../models/recipe.model';
 
+import { WOW } from 'wowjs/dist/wow.min';
+
 @Component({
   selector: 'app-recipe-view',
   templateUrl: './recipe-view.component.html',
@@ -23,6 +25,20 @@ export class RecipeViewComponent implements OnInit {
   ngOnInit() {    
     this.search();
   }
+
+  ngAfterViewInit() {
+    let wow = new WOW(
+      {
+      boxClass:     'wow',      // default
+      animateClass: 'animated', // default
+      offset:       0,          // default
+      mobile:       true,       // default
+      live:         true        // default
+      });
+  
+    wow.init();
+  }
+
 
   search() {
     console.log('Getting info from server...');
