@@ -35,7 +35,7 @@ export class RecipeService {
         optionsString += key.replace('free', '-free');
 
         if (Object.keys(options).indexOf(key) < Object.keys(options).length) {
-          optionsString += ', ';
+          optionsString += ',';
         }
       }
     });
