@@ -34,7 +34,7 @@ export class RecipeService {
       if (options[key] == true) {
         optionsString += key.replace('free', '-free');
 
-        if (Object.keys(options).indexOf(key) < Object.keys(options).length) {
+        if (Object.keys(options).indexOf(key) < Object.keys(options).length - 1) {
           optionsString += ',';
         }
       }
