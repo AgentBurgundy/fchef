@@ -12,12 +12,18 @@ import { WOW } from 'wowjs/dist/wow.min';
 })
 export class RecipeViewComponent implements OnInit {
 
+  
+
   isLoading: boolean = true;
   error: boolean = false;
   queryTerm: string = 'chicken';
   currentFuckingRecipe: Recipe;
-  fuckingOptions: any = {
-
+  queryOptions: any = {
+    celeryfree: false,
+    crustaceanfree: false,
+    dairyfree: false,
+    eggfree: false,
+    glutenfree: false,
   };
 
   constructor(private recipeService: RecipeService) { }
@@ -46,7 +52,7 @@ export class RecipeViewComponent implements OnInit {
     this.error = false;
 
     this.recipeService.getAuth().subscribe(auth => {
-      this.recipeService.getRandomRecipe(auth, this.queryTerm, this.fuckingOptions)
+      this.recipeService.getRandomRecipe(auth, this.queryTerm, this.queryOptions)
         .subscribe(data => 
           {
             this.currentFuckingRecipe = data;

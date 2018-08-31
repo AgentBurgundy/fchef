@@ -29,6 +29,13 @@ export class RecipeService {
   }
 
   public getRandomRecipe(data: any, query: string, options: any): Observable<Recipe> {
+    let optionsString: string = '';
+    Object.keys(options).forEach(key => {
+      if (options[key] == true) {
+        optionsString += key.replace('free', '-free');
+      }
+    });
+    
     return this.http.get('https://api.edamam.com/search', {
       params: {
         "app_id": data.id,
@@ -36,6 +43,7 @@ export class RecipeService {
         "from": "0",
         "to": "100",
         "q": query,
+        "health": optionsString
       }
     }).pipe(map((res: Response) => {
       let index : number = Math.floor(Math.random() * Object.keys(res['hits']).length);
