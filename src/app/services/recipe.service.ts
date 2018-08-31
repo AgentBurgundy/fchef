@@ -35,16 +35,21 @@ export class RecipeService {
         optionsString += key.replace('free', '-free');
       }
     });
+
+    let params: any = {
+      "app_id": data.id,
+      "app_key": data.key,
+      "from": "0",
+      "to": "100",
+      "q": query,      
+    }
+
+    if (optionsString !== '') {
+      params.health = optionsString
+    }
     
     return this.http.get('https://api.edamam.com/search', {
-      params: {
-        "app_id": data.id,
-        "app_key": data.key,
-        "from": "0",
-        "to": "100",
-        "q": query,
-        "health": optionsString
-      }
+      params: params
     }).pipe(map((res: Response) => {
       let index : number = Math.floor(Math.random() * Object.keys(res['hits']).length);
       let recipe: any = res['hits'][index]['recipe']
