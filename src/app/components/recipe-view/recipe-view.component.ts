@@ -5,6 +5,17 @@ import { Recipe } from '../../models/recipe.model';
 
 import { WOW } from 'wowjs/dist/wow.min';
 
+const searchTerms: string[] = [
+  "chicken",
+  "steak",
+  "turkey",
+  "broccoli",
+  "pasta",
+  "macaroni",
+  "pizza",
+  "bagel"
+];
+
 @Component({
   selector: 'app-recipe-view',
   templateUrl: './recipe-view.component.html',
@@ -45,6 +56,15 @@ export class RecipeViewComponent implements OnInit {
     wow.init();
   }
 
+  randomSearch() {
+    Object.keys(this.queryOptions).forEach(key => {
+      this.queryOptions[key] = Math.random() >= 0.5;
+    });
+
+    this.queryTerm = searchTerms[Math.floor(Math.random() * searchTerms.length)]
+
+    this.search();
+  }
 
   search() {
     console.log('Getting info from server...');
