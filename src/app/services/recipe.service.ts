@@ -33,6 +33,8 @@ export class RecipeService {
       params: {
         "app_id": data.id,
         "app_key": data.key,
+        "from": "0",
+        "to": "100",
         "q": query,
       }
     }).pipe(map((res: Response) => {
