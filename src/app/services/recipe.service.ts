@@ -32,7 +32,7 @@ export class RecipeService {
     let optionsString: string = '';
     Object.keys(options).forEach(key => {
       if (options[key] == true) {
-        optionsString += '"' + key.replace('free', '-free') + '"';
+        optionsString += key.replace('free', '-free');
 
         if (Object.keys(options).indexOf(key) < Object.keys(options).length) {
           optionsString += ', ';
