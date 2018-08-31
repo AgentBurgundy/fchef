@@ -63,28 +63,44 @@ export class RecipeViewComponent implements OnInit {
 
     this.queryTerm = searchTerms[Math.floor(Math.random() * searchTerms.length)]
 
-    this.search();
+    this.performRequest().subscribe(data => 
+      {
+        this.currentFuckingRecipe = data;
+        console.log(data.image_url);
+        this.isLoading = false;
+      },
+      error => {
+        this.randomSearch();
+    });
   }
 
-  search() {
+  performRequest(): Observable<Recipe> {
+    let result: Observable<Recipe>;
+
     console.log('Getting info from server...');
     this.isLoading = true;
     this.error = false;
-
+    
     this.recipeService.getAuth().subscribe(auth => {
-      this.recipeService.getRandomRecipe(auth, this.queryTerm, this.queryOptions)
-        .subscribe(data => 
-          {
-            this.currentFuckingRecipe = data;
-            console.log(data.image_url);
-            this.isLoading = false;
-          },
-        error => {
-          console.log(error);
-          this.isLoading = false;
-          this.error = true;
-        });
-    });    
+      result = this.recipeService.getRandomRecipe(auth, this.queryTerm, this.queryOptions)});
+
+    if (result) {
+      return result;
+    }
+  }
+
+  search() {    
+    this.performRequest().subscribe(data => 
+      {
+        this.currentFuckingRecipe = data;
+        console.log(data.image_url);
+        this.isLoading = false;
+      },
+      error => {
+        console.log(error);
+        this.isLoading = false;
+        this.error = true;
+    });  
   }
 
 }
