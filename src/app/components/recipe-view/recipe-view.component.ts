@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Recipe } from '../../models/recipe.model';
 
 import { WOW } from 'wowjs/dist/wow.min';
+import { Auth } from '../../models/auth.model';
 
 const searchTerms: string[] = [
   "chicken",
@@ -24,7 +25,7 @@ const searchTerms: string[] = [
 export class RecipeViewComponent implements OnInit {
 
   
-
+  auth: Auth;
   isLoading: boolean = true;
   error: boolean = false;
   queryTerm: string = 'chicken';
@@ -40,6 +41,10 @@ export class RecipeViewComponent implements OnInit {
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {    
+    this.recipeService.getAuth().subscribe(auth => {
+      this.auth = auth;
+    });
+
     this.search();
   }
 
@@ -75,21 +80,15 @@ export class RecipeViewComponent implements OnInit {
   }
 
   performRequest(): Observable<Recipe> {
-    let result: Observable<Recipe>;
-
     console.log('Getting info from server...');
     this.isLoading = true;
     this.error = false;
     
-    this.recipeService.getAuth().subscribe(auth => {
-      result = this.recipeService.getRandomRecipe(auth, this.queryTerm, this.queryOptions)});
-
-    if (result) {
-      return result;
-    }
+    return this.recipeService
+      .getRandomRecipe(this.auth, this.queryTerm, this.queryOptions);
   }
 
-  search() {    
+  search() {
     this.performRequest().subscribe(data => 
       {
         this.currentFuckingRecipe = data;
