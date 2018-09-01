@@ -10,8 +10,6 @@ import { appRoutes } from './app-routes';
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 import { ImageViewComponent } from './components/image-view/image-view.component';
 
-import { AdsenseModule } from 'ng2-adsense';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,12 +21,7 @@ import { AdsenseModule } from 'ng2-adsense';
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    FormsModule,
-    AdsenseModule.forRoot({
-      adClient: 'ca-pub-6330340371201691',
-      adSlot: 7259870550,
-      pageLevelAds: true
-    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
